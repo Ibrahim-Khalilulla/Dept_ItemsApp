@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Dept_ItemsApp.Models.dept2>
+@using Dept_ItemsApp.Models
+@{
+    ViewBag.Title = "ShowMe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.sid = Request.QueryString["sid"];
+}
+
+<h2>ShowMe</h2>
+<div class="container">
+    <div class="col-sm-4">
+        <ol>
+            @foreach (var a in Model)
+            {
+                <li>
+                    @Html.ActionLink(@a.deptname + "- (Products: " + @a.items2.Count() + ")", "showme", new { sid = @a.deptid })
+
+                    <input id="operation" type="button" class="btn btn-info btn-xs" onclick="changeurl('@a.deptid')" value="Edit" />
+                </li>
+                @*@Html.ActionLink("Edit", "showme", new { sid = @a.deptid }, new { onclick = "changeurl('@a.deptid')" })*@
+            }
+        </ol>
+        <button id="operation" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">New</button>
+    </div>
+    <div class="col-sm-8">
+        @Html.Action("showitems", new { sid = ViewBag.sid })
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Operation in CRUD</h4>
+            </div>
+            <div class="modal-body">
+
+                @Html.Action("create2", new { sid = ViewBag.sid })
+
+
+
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+// $("#myModal").modal();
+
+function changeurl(a) {
+// localStorage.name = a;
+// localStorage.setItem('test', a);
+// window.location.href = "?sid=" + a;
+// alert(a);
+//jQuery.noConflict();
+//$.cookie('name', a);
+// gvar = a;
+//var url1 = window.location;
+//var url = new URL(url1);
+//url.searchParams.set("sid", a);
+abc()
+}
+function abc() {
+window.setTimeout(function () {
+$('#myModal').modal();
+}, 300);
+}
+$(document).ready(function () {
+if (gvar == 100) {
+$('#myModal').modal();
+}
+gvar = 0;
+//let searchParams = new URLSearchParams(window.location.search)
+//// alert(searchParams.has('sid'));
+//if (searchParams.has('sid')) {
+//    $('#myModal').modal();
+//}
+})
+</script>
+@*@model Dept_ItemsApp.Models.dept2
+
+    @{
+        ViewBag.Title = "ShowMe";
+    }
+
+    <h2>ShowMe</h2>
+
+    <div>
+        <h4>dept2</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.deptname)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.deptname)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.location)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.location)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.deptid }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
